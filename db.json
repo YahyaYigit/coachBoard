@@ -1,0 +1,852 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123"
+    }
+  ],
+  "groups": [
+    {
+      "id": "group_u8",
+      "name": "U-8",
+      "trainingHours": [
+        {
+          "day": "Pazartesi",
+          "time": "16:00 - 17:00"
+        },
+        {
+          "day": "Çarşamba",
+          "time": "16:30 - 17:30"
+        },
+        {
+          "day": "Cumartesi",
+          "time": "10:00 - 11:00"
+        }
+      ],
+      "players": [
+        {
+          "id": 101,
+          "firstName": "Ahmet",
+          "lastName": "Yılmaz",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2015-04-12",
+          "address": "Ankara, Türkiye",
+          "phone": "5551234567",
+          "school": "TTMAL",
+          "height": "1.88",
+          "weight": "99",
+          "healthProblem": "obez",
+          "motherName": "Elif Yılmaz",
+          "motherContact": "5552345678",
+          "fatherName": "Mehmet Yılmaz",
+          "fatherContact": "5553456789",
+          "email": "ahmet.yılmaz@example.com",
+          "password": "kgxj5z",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katıldı",
+          "motherWhatsappGroup": "katılmadı",
+          "fees": {
+            "2020": {
+              "Ocak": {
+                "amount": "1122",
+                "paymentMethod": "Makbuz"
+              }
+            },
+            "2025": {
+              "Mart": {
+                "amount": "21312",
+                "paymentMethod": "IBAN"
+              }
+            }
+          }
+        },
+        {
+          "id": 1738665011951,
+          "firstName": "Arda",
+          "lastName": "Turan",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2025-01-31",
+          "address": "Barselona",
+          "phone": "05342563265",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "Mary Well",
+          "motherContact": "213132132312",
+          "fatherName": "Hüsnü Çoban",
+          "fatherContact": "056325418974",
+          "email": "arda@gmail.com",
+          "password": "123",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı",
+          "fees": {
+            "2020": {
+              "Ocak": {
+                "amount": "1",
+                "paymentMethod": "IBAN"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "group_u9",
+      "name": "U-9",
+      "trainingHours": [
+        {
+          "day": "Salı",
+          "time": "11:22 - 12:22"
+        },
+        {
+          "day": "Perşembe",
+          "time": "16:30 - 17:30"
+        },
+        {
+          "day": "Cumartesi",
+          "time": "11:00 - 12:00"
+        }
+      ],
+      "players": [
+        {
+          "id": 201,
+          "firstName": "Burak",
+          "lastName": "Balkan",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2014-03-02",
+          "address": "Eskişehir, Türkiye",
+          "phone": "5554321098",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "Ayşegül Balkan",
+          "motherContact": "5553210987",
+          "fatherName": "Mehmet Balkan",
+          "fatherContact": "5552109876",
+          "email": "burak.balkan@example.com",
+          "password": "123",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katıldı",
+          "fatherWhatsappGroup": "katıldı",
+          "motherWhatsappGroup": "katıldı",
+          "fees": {
+            "2025": {
+              "Ocak": {
+                "amount": "",
+                "paymentMethod": "Makbuz"
+              }
+            }
+          }
+        },
+        {
+          "id": 1738669852631,
+          "firstName": "Burak",
+          "lastName": "dassad",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2025-02-19",
+          "address": "qwewqe",
+          "phone": "2132132132",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "qweqew",
+          "motherContact": "123123231",
+          "fatherName": "qweqwe",
+          "fatherContact": "123213",
+          "email": "asd@gmail.com",
+          "password": "123",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı"
+        }
+      ]
+    },
+    {
+      "id": "group_u10",
+      "name": "U-10",
+      "trainingHours": [
+        {
+          "day": "Perşembe",
+          "time": "11:55 - 12:55"
+        },
+        {
+          "day": "Cumartesi",
+          "time": "16:00 - 17:00"
+        },
+        {
+          "day": "Pazar",
+          "time": "10:00 - 11:00"
+        }
+      ],
+      "players": [
+        {
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
+          "dob": "1999-02-02",
+          "phone": "0532 542 44 44",
+          "school": "kemerdere",
+          "address": "kemerdere",
+          "height": "1.80",
+          "weight": "70",
+          "motherName": "Nazike Akyıldız",
+          "motherContact": "0544 234 62 23",
+          "fatherName": "Hüsnü Akyıldız",
+          "fatherContact": "0243 234 23 12",
+          "email": "srdr@gmail.com",
+          "password": "123",
+          "healthProblem": "yok",
+          "whatsappGroup": "katıldı",
+          "fatherWhatsappGroup": "katıldı",
+          "motherWhatsappGroup": "katıldı",
+          "id": 1740483713549,
+          "fees": {
+            "2025": {
+              "Ocak": {
+                "amount": "1500",
+                "paymentMethod": "IBAN"
+              },
+              "Şubat": {
+                "amount": "2000",
+                "paymentMethod": "Makbuz"
+              },
+              "Mart": {
+                "amount": "000",
+                "paymentMethod": "IBAN"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "group_u12",
+      "name": "U-12",
+      "trainingHours": [
+        {
+          "day": "Salı",
+          "time": "18:00 - 19:00"
+        },
+        {
+          "day": "Cuma",
+          "time": "17:00 - 18:00"
+        },
+        {
+          "day": "Pazar",
+          "time": "11:11 - 16:11"
+        }
+      ],
+      "players": [
+        {
+          "id": 501,
+          "firstName": "Burak",
+          "lastName": "Gül",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2011-08-01",
+          "address": "Adana, Türkiye",
+          "phone": "5555432109",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "Zeynep Gül",
+          "motherContact": "5556543210",
+          "fatherName": "Hasan Gül",
+          "fatherContact": "5557654321",
+          "email": "burak.gül@example.com",
+          "password": "da4zag",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı",
+          "fees": {
+            "2025": {
+              "Ocak": {
+                "amount": "2",
+                "paymentMethod": ""
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "group_u14",
+      "name": "U-14",
+      "trainingHours": [
+        {
+          "day": "Çarşamba",
+          "time": "17:30 - 18:30"
+        },
+        {
+          "day": "Cumartesi",
+          "time": "14:00 - 15:00"
+        },
+        {
+          "day": "Pazar",
+          "time": "14:00 - 15:00"
+        }
+      ],
+      "players": [
+        {
+          "id": 601,
+          "firstName": "Eda",
+          "lastName": "Yılmaz",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2009-02-02",
+          "address": "Manisa, Türkiye",
+          "phone": "5554322321",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "Derya Yılmaz",
+          "motherContact": "5556543210",
+          "fatherName": "Ahmet Yılmaz",
+          "fatherContact": "5557654321",
+          "email": "eda.yılmaz@example.com",
+          "password": "ize6to",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı"
+        }
+      ]
+    },
+    {
+      "id": "group_u16",
+      "name": "U-16",
+      "trainingHours": [
+        {
+          "day": "Salı",
+          "time": "19:00 - 20:00"
+        },
+        {
+          "day": "Perşembe",
+          "time": "18:00 - 19:00"
+        },
+        {
+          "day": "Cumartesi",
+          "time": "13:00 - 14:00"
+        }
+      ],
+      "players": [
+        {
+          "id": 701,
+          "firstName": "Hasan",
+          "lastName": "Kaya",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2007-05-10",
+          "address": "Bursa, Türkiye",
+          "phone": "5554321098",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "Fatma Kaya",
+          "motherContact": "5555432109",
+          "fatherName": "Ahmet Kaya",
+          "fatherContact": "5556543210",
+          "email": "hasan.kaya@example.com",
+          "password": "oy5p5l",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı"
+        },
+        {
+          "id": 1738646074273,
+          "firstName": "qwweq",
+          "lastName": "ewqqw",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2025-02-14",
+          "address": "wqeweqweewq",
+          "phone": "213213231",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "qewewqewq",
+          "motherContact": "123312321",
+          "fatherName": "eqweqwqweeqw",
+          "fatherContact": "231231321",
+          "email": "qwweq.ewqqw@example.com",
+          "password": "6p91qy",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı"
+        },
+        {
+          "id": 1738663755743,
+          "firstName": "Çınar",
+          "lastName": "Bal",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2025-02-19",
+          "address": "samandıra merkez",
+          "phone": "05342563265",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "fadime",
+          "motherContact": "05366665845",
+          "fatherName": "muslera",
+          "fatherContact": "056325418974",
+          "email": "cinar@gmail.com",
+          "password": "123",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı"
+        }
+      ]
+    },
+    {
+      "id": "group_u18",
+      "name": "U-18",
+      "trainingHours": [
+        {
+          "day": "Salı",
+          "time": "19:00 - 20:00"
+        },
+        {
+          "day": "Perşembe",
+          "time": "18:00 - 19:00"
+        },
+        {
+          "day": "Cumartesi",
+          "time": "13:00 - 14:00"
+        }
+      ],
+      "players": [
+        {
+          "id": 701,
+          "firstName": "Hasan",
+          "lastName": "Kaya",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2007-05-10",
+          "address": "Bursa, Türkiye",
+          "phone": "5554321098",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "Fatma Kaya",
+          "motherContact": "5555432109",
+          "fatherName": "Ahmet Kaya",
+          "fatherContact": "5556543210",
+          "email": "hasan.kaya@example.com",
+          "password": "oy5p5l",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı"
+        },
+        {
+          "id": 1738646074273,
+          "firstName": "qwweq",
+          "lastName": "ewqqw",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2025-02-14",
+          "address": "wqeweqweewq",
+          "phone": "213213231",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "qewewqewq",
+          "motherContact": "123312321",
+          "fatherName": "eqweqwqweeqw",
+          "fatherContact": "231231321",
+          "email": "qwweq.ewqqw@example.com",
+          "password": "6p91qy",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı"
+        },
+        {
+          "id": 1738663755743,
+          "firstName": "Çınar",
+          "lastName": "Bal",
+          "club": "Balkan Yeşilbağlar Spor Kulübü",
+          "birthPlace": "",
+          "dob": "2025-02-19",
+          "address": "samandıra merkez",
+          "phone": "05342563265",
+          "school": "",
+          "height": "",
+          "weight": "",
+          "healthProblem": "",
+          "motherName": "fadime",
+          "motherContact": "05366665845",
+          "fatherName": "muslera",
+          "fatherContact": "056325418974",
+          "email": "cinar@gmail.com",
+          "password": "123",
+          "fee": 0,
+          "attendance": "belirtilmedi",
+          "whatsappGroup": "katılmadı",
+          "fatherWhatsappGroup": "katılmadı",
+          "motherWhatsappGroup": "katılmadı"
+        }
+      ]
+    },
+    {
+      "id": "group_u-21",
+      "name": "U-21",
+      "trainingHours": [
+        {
+          "day": "Salı",
+          "time": "08:00 - 09:00"
+        }
+      ],
+      "players": [
+        {
+          "firstName": "Mustafa",
+          "lastName": "Sarıgül",
+          "dob": "2222-02-22",
+          "phone": "22222222222",
+          "school": "yok",
+          "address": "yok",
+          "height": "111",
+          "weight": "222",
+          "motherName": "Fatma Sarıgül",
+          "motherContact": "44444444444",
+          "fatherName": "Arslan Sarıgül",
+          "fatherContact": "22222222222",
+          "email": "mustik@gmail.com",
+          "password": "123",
+          "healthProblem": "obez",
+          "whatsappGroup": "katıldı",
+          "fatherWhatsappGroup": "katıldı",
+          "motherWhatsappGroup": "katıldı",
+          "id": 1740375876468
+        }
+      ]
+    }
+  ],
+  "attendances": [
+    {
+      "id": "d5f8",
+      "groupId": "group_u12",
+      "date": "2025-02-07",
+      "players": [
+        {
+          "playerId": 501,
+          "firstName": "Burak",
+          "lastName": "Gül",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "f88c",
+      "groupId": "group_u12",
+      "date": "2025-02-05",
+      "players": [
+        {
+          "playerId": 501,
+          "firstName": "Burak",
+          "lastName": "Gül",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "0cd5",
+      "groupId": "group_u18",
+      "date": "2025-02-08",
+      "players": [
+        {
+          "playerId": 801,
+          "firstName": "Mehmet",
+          "lastName": "Yıldız",
+          "status": "belirtilmedi"
+        },
+        {
+          "playerId": 1738664680267,
+          "firstName": "Çınar",
+          "lastName": "Bal",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "0334",
+      "groupId": "group_u9",
+      "date": "2025-02-01",
+      "players": [
+        {
+          "playerId": 201,
+          "firstName": "Burak",
+          "lastName": "Balkan",
+          "status": "Geldi"
+        },
+        {
+          "playerId": 1738669852631,
+          "firstName": "Burak",
+          "lastName": "dassad",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "3235",
+      "groupId": "group_u10",
+      "date": "2025-02-01",
+      "players": [
+        {
+          "playerId": 301,
+          "firstName": "Murat",
+          "lastName": "Yılmaz",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "00d7",
+      "groupId": "group_u10",
+      "date": "2025-02-20",
+      "players": [
+        {
+          "playerId": 301,
+          "firstName": "Murat",
+          "lastName": "Yılmaz",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "0f68",
+      "groupId": "group_u10",
+      "date": "2025-02-09",
+      "players": [
+        {
+          "playerId": 301,
+          "firstName": "Murat",
+          "lastName": "Yılmaz",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "ae97",
+      "groupId": "group_u10",
+      "date": "2025-02-20",
+      "players": [
+        {
+          "playerId": 301,
+          "firstName": "Murat",
+          "lastName": "Yılmaz",
+          "status": "belirtilmedi"
+        }
+      ]
+    },
+    {
+      "id": "fb21",
+      "groupId": "group_u10",
+      "date": "2025-02-19",
+      "players": [
+        {
+          "playerId": 301,
+          "firstName": "Murat",
+          "lastName": "Yılmaz",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "3ffe",
+      "groupId": "group_u12",
+      "date": "2025-02-01",
+      "players": [
+        {
+          "playerId": 501,
+          "firstName": "Burak",
+          "lastName": "Gül",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "1170",
+      "groupId": "group_u12",
+      "date": "2025-02-01",
+      "players": [
+        {
+          "playerId": 501,
+          "firstName": "Burak",
+          "lastName": "Gül",
+          "status": "belirtilmedi"
+        }
+      ]
+    },
+    {
+      "id": "1a89",
+      "groupId": "group_u10",
+      "date": "2025-02-02",
+      "players": [
+        {
+          "playerId": 301,
+          "firstName": "Murat",
+          "lastName": "Yılmaz",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "f8b6",
+      "groupId": "group_u10",
+      "date": "2025-02-19",
+      "players": [
+        {
+          "playerId": 301,
+          "firstName": "Murat",
+          "lastName": "Yılmaz",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "0f69",
+      "groupId": "group_u10",
+      "date": "2025-02-08",
+      "players": [
+        {
+          "playerId": 1740483713549,
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "bce1",
+      "groupId": "group_u10",
+      "date": "2025-02-01",
+      "players": [
+        {
+          "playerId": 1740483713549,
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "ba9d",
+      "groupId": "group_u10",
+      "date": "2025-02-16",
+      "players": [
+        {
+          "playerId": 1740483713549,
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "49f6",
+      "groupId": "group_u10",
+      "date": "2025-02-27",
+      "players": [
+        {
+          "playerId": 1740483713549,
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "da00",
+      "groupId": "group_u10",
+      "date": "2025-02-17",
+      "players": [
+        {
+          "playerId": 1740483713549,
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "979f",
+      "groupId": "group_u10",
+      "date": "2025-02-28",
+      "players": [
+        {
+          "playerId": 1740483713549,
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "7105",
+      "groupId": "group_u10",
+      "date": "2025-02-03",
+      "players": [
+        {
+          "playerId": 1740483713549,
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "74c1",
+      "groupId": "group_u9",
+      "date": "2025-01-30",
+      "players": [
+        {
+          "playerId": 201,
+          "firstName": "Burak",
+          "lastName": "Balkan",
+          "status": "Gelmedi"
+        },
+        {
+          "playerId": 1738669852631,
+          "firstName": "Burak",
+          "lastName": "dassad",
+          "status": "Geldi"
+        }
+      ]
+    }
+  ]
+}

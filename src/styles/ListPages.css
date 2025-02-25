@@ -1,0 +1,47 @@
+.list-page{
+  margin: 70px 0;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.edit-btn, .delete-btn {
+  background-color: transparent;
+  border: none; 
+  cursor: pointer; 
+  font-size: 18px; 
+}
+
+.edit-btn {
+  background-color: #007bff!important; 
+}
+
+.edit-btn:hover {
+  background-color: #0056b3!important; 
+}
+
+.delete-btn {
+  background-color: #cf2f1d; 
+  color: white; 
+}
+
+.delete-btn:hover {
+  background-color: #ca1b08;
+}

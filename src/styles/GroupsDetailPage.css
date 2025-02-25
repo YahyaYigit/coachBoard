@@ -1,0 +1,92 @@
+.group-detail-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    background-color: #f6f6f6;
+    color: black;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .group-detail-page h2{
+    color: black;
+  }
+  
+  .group-detail-page h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .group-detail-page h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin-bottom: 20px;
+  }
+  
+  .action-button {
+    font-size: 2.2rem;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: transparent;
+    color: black!important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .action-button:hover {
+    background-color: rgb(231, 231, 231)!important;
+  }
+  
+  .notify-button {
+    font-size: 2.4rem;
+    padding: 15px 30px;
+    background-color: transparent;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    background-color: none!important;
+  }
+
+  .notify-button:hover {
+    font-size: 2.4rem;
+    padding: 15px 30px;
+    background-color: transparent;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    background-color: rgb(231, 231, 231);
+  }
+  
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .back-button svg {
+    color: black;
+    transition: color 0.3s ease;
+  }
+  
+  .back-button:hover svg {
+    color: gray;
+  }
+  

@@ -1,0 +1,51 @@
+  .groups-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    color: black;
+    text-align: center;
+    background-color: #f6f6f6;
+  }
+  
+  .groups-page h2{
+    color: black;
+  }
+
+  .groups-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .groups-page h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+  
+  .groups-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  
+  .group-item {
+    font-size: 2.5rem;
+    padding: 10px;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 5px;
+    background-color: transparent;
+    transition: background-color 0.4s ease;
+    flex: 1 1 18%;
+    box-sizing: border-box;
+  }
+  
+  .group-item:hover {
+    color: #b8b6b6;
+  }

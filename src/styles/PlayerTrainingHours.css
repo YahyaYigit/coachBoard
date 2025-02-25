@@ -1,0 +1,52 @@
+body {
+    background-color: #f6f6f6 !important;
+    overflow: auto;
+  }
+  
+  .training-hours {
+    background-color: #f6f6f6 ;
+    color: black;
+    text-align: center;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 130px auto;
+  }
+  
+  h1 {
+    padding-top: 5px;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.8em;
+    margin-top: 20px;
+  }
+  
+  h3 {
+    font-size: 1.5em;
+    margin-top: 30px;
+  }
+  
+  .training-hours-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .training-hours-item {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    font-weight: bold;
+  }
+  
+  .training-hours-item span {
+    margin-right: 15px;
+  }
+  

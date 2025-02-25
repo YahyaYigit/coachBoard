@@ -1,0 +1,29 @@
+.past-attendance-page {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    color: black;
+  }
+  
+  .attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  .attendance-table th, .attendance-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .attendance-table th {
+    font-weight: bold;
+  }
+  
+  .attendance-table td {
+    height: 40px;
+    vertical-align: middle;
+  }
+  

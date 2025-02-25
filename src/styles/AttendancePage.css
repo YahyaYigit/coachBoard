@@ -1,0 +1,86 @@
+.attendance-page {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: black;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.new-attendance,
+.past-attendances {
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+input[type="date"] {
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+button.submit-button {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+
+button.submit-button:hover {
+  background-color: black;
+}
+
+.player-attendance {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.player-attendance label {
+  margin-left: 10px;
+}
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.past-attendances ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.past-attendances li {
+  margin-bottom: 15px;
+}
+
+.past-attendances li strong {
+  font-size: 25px;
+}
+
+.past-attendances ul ul {
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.past-attendances li ul li {
+  margin-bottom: 5px;
+}
