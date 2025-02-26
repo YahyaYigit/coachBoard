@@ -1,2 +1,2 @@
-# firstReactProject
-My Movies App
+# CoachBoard  
+CoachBoard
