@@ -73,5 +73,25 @@
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Hata mesajına hafif gölge */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .club-login form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .club-login h1 {
+    font-size: 2rem;
+  }
+
+  .input-group input {
+    padding: 8px;
+  }
+
+  .login-button {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
 }

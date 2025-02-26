@@ -1,53 +1,72 @@
 .player-dashboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100vh;
-    background-color: #f6f6f6;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: #f6f6f6;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-top: 200px;
+}
+
+.player-dashboard h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.player-dashboard h2 {
+  color: white;
+  font-size: 50px;
+  margin-bottom: 2rem;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.action-button {
+  color: white;
+  border: none;
+  font-size: 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  width: 350px;
+  text-align: center;
+}
+
+.action-button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.loading {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .player-dashboard {
+    padding-top: 100px;
   }
-  
-  .player-dashboard h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-  
+
   .player-dashboard h2 {
-    color: white;
-    font-size: 50px;
-    margin-bottom: 2rem;
-  }
-  
-  .buttons-container {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 50px;
-  }
-  
-  .action-button {
-    color: white;
-    border: none;
     font-size: 30px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    width: 350px;
-    text-align: center;
   }
-  
-  .action-button:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+
+  .buttons-container {
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  .loading {
-    color: white;
-    font-size: 1.5rem;
-    text-align: center;
-    margin-top: 20px;
+
+  .action-button {
+    width: 100%;
+    font-size: 20px;
   }
-  
+}

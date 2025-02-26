@@ -69,3 +69,21 @@ input[type="time"] {
   justify-content: space-evenly;
   margin: 22px 126px 0px 125px;
 }
+
+@media (max-width: 768px) {
+  .training-hours-page {
+    padding: 20px;
+    margin: 10px auto;
+    height: auto;
+  }
+
+  .input-container input,
+  .input-container select {
+    width: 100%;
+  }
+
+  .btn-order {
+    flex-direction: column;
+    margin: 10px 0;
+  }
+}

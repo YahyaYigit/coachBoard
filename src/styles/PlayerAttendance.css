@@ -3,54 +3,69 @@
 }
 
 .filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .search-button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .search-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .loading-text {
-    margin-top: 10px;
-    font-size: 14px;
-    color: black;
-    font-weight: bold;
-  }
-  
-  .attendance-days {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-  }
-  
-  .day-box {
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-align: center;
-    min-width: 40px;
-    font-weight: bold;
-    color: black;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.search-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.loading-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+}
+
+.attendance-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.day-box {
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+  min-width: 40px;
+  font-weight: bold;
+  color: black;
+}
+
+.player-attendance h1,h2,h3{
+  color: black;
+}
+
+.recordStatus{
+  font-weight: bold;
+  font-size: 30px;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .player-attendance h1,h2,h3{
-    color: black;
+  .attendance-days {
+    justify-content: center;
   }
-  
-  .recordStatus{
-    font-weight: bold;
-    font-size: 30px;
+
+  .day-box {
+    min-width: 30px;
+    padding: 4px 8px;
   }
-  
+}

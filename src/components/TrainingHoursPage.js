@@ -34,7 +34,7 @@ function TrainingHoursPage() {
   };
 
   const handleAddNewDay = () => {
-    if (!newDay || !newStartTime || !newEndTime) {
+    if (!newDay || newDay === "Gün Seçin" || !newStartTime || !newEndTime) {
       alert("Lütfen tüm alanları doldurun.");
       return;
     }
@@ -54,6 +54,7 @@ function TrainingHoursPage() {
           trainingHours: [...prevGroup.trainingHours, newTrainingHour],
         }));
         setShowNewDayForm(false);
+        alert("Yeni gün başarıyla eklendi!");
       })
       .catch((error) => {
         console.error("Yeni gün eklenirken hata oluştu:", error);
@@ -99,6 +100,7 @@ function TrainingHoursPage() {
               value={newDay}
               onChange={(e) => setNewDay(e.target.value)}
             >
+              <option value="Gün Seçin">Gün Seçin</option>
               {["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"].map((d) => (
                 <option key={d} value={d}>
                   {d}

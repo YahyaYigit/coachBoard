@@ -60,6 +60,18 @@
               "Mart": {
                 "amount": "21312",
                 "paymentMethod": "IBAN"
+              },
+              "Kasım": {
+                "amount": "96578",
+                "paymentMethod": "Makbuz"
+              },
+              "Mayıs": {
+                "amount": "9647",
+                "paymentMethod": "IBAN"
+              },
+              "Temmuz": {
+                "amount": "103.53",
+                "paymentMethod": "IBAN"
               }
             }
           }
@@ -93,6 +105,28 @@
               "Ocak": {
                 "amount": "1",
                 "paymentMethod": "IBAN"
+              }
+            },
+            "2025": {
+              "Haziran": {
+                "amount": "5246",
+                "paymentMethod": "Burslu"
+              },
+              "Şubat": {
+                "amount": "9957",
+                "paymentMethod": "Makbuz"
+              },
+              "Ağustos": {
+                "amount": "95782",
+                "paymentMethod": "Makbuz"
+              },
+              "Ocak": {
+                "amount": "10",
+                "paymentMethod": "Burslu"
+              },
+              "Nisan": {
+                "amount": "1424",
+                "paymentMethod": "Kredi-Karti"
               }
             }
           }
@@ -146,6 +180,18 @@
               "Ocak": {
                 "amount": "",
                 "paymentMethod": "Makbuz"
+              },
+              "Şubat": {
+                "amount": "324",
+                "paymentMethod": ""
+              },
+              "Temmuz": {
+                "amount": "42345",
+                "paymentMethod": "IBAN"
+              },
+              "Mayıs": {
+                "amount": "43243",
+                "paymentMethod": "Kredi-Karti"
               }
             }
           }
@@ -173,7 +219,23 @@
           "attendance": "belirtilmedi",
           "whatsappGroup": "katılmadı",
           "fatherWhatsappGroup": "katılmadı",
-          "motherWhatsappGroup": "katılmadı"
+          "motherWhatsappGroup": "katılmadı",
+          "fees": {
+            "2025": {
+              "Şubat": {
+                "amount": "4234",
+                "paymentMethod": ""
+              },
+              "Nisan": {
+                "amount": "432",
+                "paymentMethod": ""
+              },
+              "Temmuz": {
+                "amount": "4324",
+                "paymentMethod": "Gelmedi"
+              }
+            }
+          }
         }
       ]
     },
@@ -182,8 +244,8 @@
       "name": "U-10",
       "trainingHours": [
         {
-          "day": "Perşembe",
-          "time": "11:55 - 12:55"
+          "day": "Pazartesi",
+          "time": "15:00 - 16:00"
         },
         {
           "day": "Cumartesi",
@@ -192,6 +254,10 @@
         {
           "day": "Pazar",
           "time": "10:00 - 11:00"
+        },
+        {
+          "day": "Salı",
+          "time": "12:00 - 13:00"
         }
       ],
       "players": [
@@ -228,6 +294,10 @@
               "Mart": {
                 "amount": "000",
                 "paymentMethod": "IBAN"
+              },
+              "Nisan": {
+                "amount": "",
+                "paymentMethod": ""
               }
             }
           }
@@ -249,6 +319,10 @@
         {
           "day": "Pazar",
           "time": "11:11 - 16:11"
+        },
+        {
+          "day": "Pazartesi",
+          "time": "12:00 - 13:00"
         }
       ],
       "players": [
@@ -468,7 +542,15 @@
           "attendance": "belirtilmedi",
           "whatsappGroup": "katılmadı",
           "fatherWhatsappGroup": "katılmadı",
-          "motherWhatsappGroup": "katılmadı"
+          "motherWhatsappGroup": "katılmadı",
+          "fees": {
+            "2025": {
+              "Ocak": {
+                "amount": "213",
+                "paymentMethod": "Makbuz"
+              }
+            }
+          }
         },
         {
           "id": 1738646074273,

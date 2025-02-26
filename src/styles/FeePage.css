@@ -2,8 +2,6 @@ body {
   background-color: #2c2f33;
   color: white;
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
 }
 
 .selectors {
@@ -43,6 +41,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
   margin-top: 20px;
+  overflow-x: auto; /* Add horizontal scroll */
 }
 
 .fee-table {
@@ -74,6 +73,7 @@ body {
   border-radius: 5px;
   background-color: #99aab5;
   color: black;
+  margin-right: 10px; /* Add margin between inputs */
 }
 
 .edit-btn, .save-btn {
@@ -85,7 +85,7 @@ body {
 }
 
 .edit-btn {
-  background-color: #1da51f;
+  background-color: transparent; /* Remove background color */
   color: white;
 }
 
@@ -97,15 +97,40 @@ body {
   color: black;
 }
 
-.total-fee{
+.total-fee {
   font-weight: bold;
 }
 
-.total-fee h3{
+.total-fee h3 {
   color: white!important;
 }
 
-.player td{
+.player td {
   background-color: white!important;
   color: black;
+}
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+  .selectors {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .fee-container {
+    padding: 10px;
+  }
+
+  .fee-table th, .fee-table td {
+    padding: 8px;
+  }
+
+  .fee-input, .payment-method-select {
+    width: 100px;
+    padding: 6px;
+  }
+
+  .edit-btn, .save-btn {
+    padding: 6px 10px;
+  }
 }

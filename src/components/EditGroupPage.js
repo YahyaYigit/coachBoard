@@ -37,7 +37,7 @@ function EditGroupPage() {
       setMessage("Grup başarıyla kaydedildi.");
       setTimeout(() => {
         navigate("/groups");
-      }, 2000);
+      }, 800);
     } catch (error) {
       console.error("Grup güncellenirken hata oluştu:", error);
     }
@@ -49,7 +49,7 @@ function EditGroupPage() {
       setMessage("Grup başarıyla silindi.");
       setTimeout(() => {
         navigate("/groups");
-      }, 2000);
+      }, 800);
     } catch (error) {
       console.error("Grup silinirken hata oluştu:", error);
     }

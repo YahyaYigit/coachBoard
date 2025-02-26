@@ -30,8 +30,8 @@ function AddGroupPage() {
       await axios.post('http://localhost:5000/groups', newGroup);
       setMessage("Grup başarıyla eklendi!");
       setTimeout(() => {
-        navigate('/');  
-      }, 2000);
+        navigate('/groups');
+      }, 800);
     } catch (error) {
       console.error("Grup eklenirken hata oluştu:", error);
     }
@@ -55,7 +55,7 @@ function AddGroupPage() {
         <button className="submit-buttons" type="submit">Ekle</button>
       </form>
       {message && <div className="success-message">{message}</div>}
-      <button className="cancel-button" onClick={() => navigate('/')}>İptal</button>
+      <button className="cancel-button" onClick={() => navigate('/groups')}>İptal</button>
     </div>
   );
 }

@@ -1,29 +1,43 @@
 .edit-group-container {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+.editGroupInput{
+  padding: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .edit-group-container {
+    margin-top: 50px;
+  }
+
+  .editGroupInput {
+    width: 100%;
+  }
+
+  .button-container {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-top: 150px;
   }
-  
-  .editGroupInput{
-    padding: 10px;
-    width: 300px;
-    text-align: center;
-  }
-  
-  .button-container {
-    display: flex;
-    margin-bottom: 20px;
-    margin-top: 40px;
 }
-  
-  .delete-button {
-    background-color: red;
-    color: white;
-  }
-  
-  button:hover {
-    opacity: 0.9;
-  }
-  
