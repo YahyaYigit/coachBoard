@@ -8,10 +8,10 @@ import "../styles/PlayerFeePages.css";
 function PlayerFeePage() {
   const navigate = useNavigate();
   const [loggedInPlayer, setLoggedInPlayer] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState("Ocak");
+  const [selectedMonth, setSelectedMonth] = useState("Tümü");
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [playerFee, setPlayerFee] = useState("0");
-  const [paymentMethod, setPaymentMethod] = useState("Belirtilmedi");
+  const [playerFees, setPlayerFees] = useState([]);
+  const [paymentMethods, setPaymentMethods] = useState([]);
 
   useEffect(() => {
     const storedPlayer = localStorage.getItem("loggedInPlayer");
@@ -28,21 +28,52 @@ function PlayerFeePage() {
           );
 
           if (player && player.fees) {
-            setPlayerFee(
-              player.fees[selectedYear]?.[selectedMonth]?.amount || "0"
-            );
-            setPaymentMethod(
-              player.fees[selectedYear]?.[selectedMonth]?.paymentMethod ||
-                "Belirtilmedi"
-            );
+            const fees = [];
+            const methods = [];
+            if (selectedMonth === "Tümü") {
+              for (const month of months) {
+                fees.push(player.fees[selectedYear]?.[month]?.amount || "0");
+                methods.push(
+                  player.fees[selectedYear]?.[month]?.paymentMethod ||
+                    "Belirtilmedi"
+                );
+              }
+            } else {
+              fees.push(player.fees[selectedYear]?.[selectedMonth]?.amount || "0");
+              methods.push(
+                player.fees[selectedYear]?.[selectedMonth]?.paymentMethod ||
+                  "Belirtilmedi"
+              );
+            }
+            setPlayerFees(fees);
+            setPaymentMethods(methods);
           } else {
-            setPlayerFee("0");
-            setPaymentMethod("Belirtilmedi");
+            setPlayerFees(["0"]);
+            setPaymentMethods(["Belirtilmedi"]);
           }
         })
         .catch((error) => console.error("Veri çekme hatası:", error));
     }
   }, [selectedMonth, selectedYear]);
+
+  const months = [
+    "Ocak",
+    "Şubat",
+    "Mart",
+    "Nisan",
+    "Mayıs",
+    "Haziran",
+    "Temmuz",
+    "Ağustos",
+    "Eylül",
+    "Ekim",
+    "Kasım",
+    "Aralık",
+  ];
+
+  const calculateTotalFee = () => {
+    return playerFees.reduce((total, fee) => total + parseFloat(fee), 0);
+  };
 
   if (!loggedInPlayer) {
     return <div className="loading">Yükleniyor...</div>;
@@ -80,20 +111,8 @@ function PlayerFeePage() {
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
-              {[
-                "Ocak",
-                "Şubat",
-                "Mart",
-                "Nisan",
-                "Mayıs",
-                "Haziran",
-                "Temmuz",
-                "Ağustos",
-                "Eylül",
-                "Ekim",
-                "Kasım",
-                "Aralık",
-              ].map((month) => (
+              <option value="Tümü">Tümü</option>
+              {months.map((month) => (
                 <option key={month} value={month}>
                   {month}
                 </option>
@@ -105,20 +124,26 @@ function PlayerFeePage() {
 
       <h3>Verilen Ücretler</h3>
       <div className="fee-container">
-        <div className="fee-item">
-          <span className="player-name">
-            {loggedInPlayer.firstName} {loggedInPlayer.lastName}
-          </span>
-          {/* <span className="player-name">
-          <p>{paymentMethod}</p>
-          </span> */}
-          <span className="fee-amount">{playerFee} TL</span>
-        </div>
+        {selectedMonth === "Tümü"
+          ? months.map((month, index) => (
+              <div key={month} className="fee-item">
+                <span className="month-name">{month}</span>
+                <span className="fee-amount">{playerFees[index]} TL</span>
+                <span className="payment-method">{paymentMethods[index]}</span>
+              </div>
+            ))
+          : playerFees.map((fee, index) => (
+              <div key={selectedMonth} className="fee-item">
+                <span className="month-name">{selectedMonth}</span>
+                <span className="fee-amount">{fee} TL</span>
+                <span className="payment-method">{paymentMethods[index]}</span>
+              </div>
+            ))}
       </div>
 
       <div className="payment-info">
         <div className="fee-details">
-          <p>Aidat Tutarı: {playerFee} TL</p>
+          <p>Toplam Aidat: {calculateTotalFee()} TL</p>
         </div>
       </div>
     </div>

@@ -178,12 +178,12 @@
           "fees": {
             "2025": {
               "Ocak": {
-                "amount": "",
+                "amount": "100",
                 "paymentMethod": "Makbuz"
               },
               "Şubat": {
                 "amount": "324",
-                "paymentMethod": ""
+                "paymentMethod": "IBAN"
               },
               "Temmuz": {
                 "amount": "42345",
@@ -192,47 +192,10 @@
               "Mayıs": {
                 "amount": "43243",
                 "paymentMethod": "Kredi-Karti"
-              }
-            }
-          }
-        },
-        {
-          "id": 1738669852631,
-          "firstName": "Burak",
-          "lastName": "dassad",
-          "club": "Balkan Yeşilbağlar Spor Kulübü",
-          "birthPlace": "",
-          "dob": "2025-02-19",
-          "address": "qwewqe",
-          "phone": "2132132132",
-          "school": "",
-          "height": "",
-          "weight": "",
-          "healthProblem": "",
-          "motherName": "qweqew",
-          "motherContact": "123123231",
-          "fatherName": "qweqwe",
-          "fatherContact": "123213",
-          "email": "asd@gmail.com",
-          "password": "123",
-          "fee": 0,
-          "attendance": "belirtilmedi",
-          "whatsappGroup": "katılmadı",
-          "fatherWhatsappGroup": "katılmadı",
-          "motherWhatsappGroup": "katılmadı",
-          "fees": {
-            "2025": {
-              "Şubat": {
-                "amount": "4234",
-                "paymentMethod": ""
               },
-              "Nisan": {
-                "amount": "432",
+              "Mart": {
+                "amount": "",
                 "paymentMethod": ""
-              },
-              "Temmuz": {
-                "amount": "4324",
-                "paymentMethod": "Gelmedi"
               }
             }
           }
@@ -257,7 +220,7 @@
         },
         {
           "day": "Salı",
-          "time": "12:00 - 13:00"
+          "time": "05:55 - 05:55"
         }
       ],
       "players": [
@@ -600,7 +563,19 @@
           "attendance": "belirtilmedi",
           "whatsappGroup": "katılmadı",
           "fatherWhatsappGroup": "katılmadı",
-          "motherWhatsappGroup": "katılmadı"
+          "motherWhatsappGroup": "katılmadı",
+          "fees": {
+            "2025": {
+              "Nisan": {
+                "amount": "2131",
+                "paymentMethod": "Burslu"
+              },
+              "Mart": {
+                "amount": "0",
+                "paymentMethod": "Burslu"
+              }
+            }
+          }
         }
       ]
     },
@@ -636,6 +611,24 @@
           "id": 1740375876468
         }
       ]
+    },
+    {
+      "id": "group_u-23",
+      "name": "U-23",
+      "trainingHours": [],
+      "players": []
+    },
+    {
+      "id": "group_u-25",
+      "name": "U-25",
+      "trainingHours": [],
+      "players": []
+    },
+    {
+      "id": "group_u-s",
+      "name": "U-S",
+      "trainingHours": [],
+      "players": []
     }
   ],
   "attendances": [
@@ -926,6 +919,45 @@
           "playerId": 1738669852631,
           "firstName": "Burak",
           "lastName": "dassad",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "799d",
+      "groupId": "group_u9",
+      "date": "2025-03-06",
+      "players": [
+        {
+          "playerId": 201,
+          "firstName": "Burak",
+          "lastName": "Balkan",
+          "status": "Geldi"
+        }
+      ]
+    },
+    {
+      "id": "e7d0",
+      "groupId": "group_u9",
+      "date": "2025-03-08",
+      "players": [
+        {
+          "playerId": 201,
+          "firstName": "Burak",
+          "lastName": "Balkan",
+          "status": "Gelmedi"
+        }
+      ]
+    },
+    {
+      "id": "1291",
+      "groupId": "group_u10",
+      "date": "2025-03-08",
+      "players": [
+        {
+          "playerId": 1740483713549,
+          "firstName": "Serdar",
+          "lastName": "Akyıldız",
           "status": "Geldi"
         }
       ]

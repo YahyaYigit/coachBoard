@@ -1,10 +1,10 @@
-body{
+body {
   background-color: #f6f6f6 !important;
   overflow: auto;
 }
 
 .training-hours-page {
-  background-color: #f6f6f6; 
+  background-color: #f6f6f6;
   color: black;
   text-align: center;
   padding: 40px;
@@ -17,19 +17,19 @@ h1 {
   padding-top: 5px;
   font-size: 2em;
   margin-bottom: 20px;
-  color: black!important;
+  color: black !important;
 }
 
 h2 {
   font-size: 1.8em;
   margin-top: 20px;
-  color: black!important;
+  color: black !important;
 }
 
 h3 {
   font-size: 1.5em;
   margin-top: 30px;
-  color: black!important;
+  color: black !important;
 }
 
 .training-hours-list {
@@ -40,17 +40,26 @@ h3 {
 
 .training-hours-item {
   font-size: 1.4em;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: black;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding-top: 10px;
   font-weight: bold;
 }
 
 .training-hours-item span {
-  margin-right: 15px;
+  margin-right: 10px;
+  flex: 1;
+  text-align: left;
+}
+
+.edit-button {
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-left: 10px;  
 }
 
 @media (max-width: 768px) {
@@ -61,11 +70,17 @@ h3 {
 
   .training-hours-item {
     font-size: 1.2em;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .training-hours-item span {
-    margin-right: 0;
+    margin-right: 10px;
+    text-align: left;
+  }
+
+  .edit-button {
+    margin-left: 10px;
   }
 }

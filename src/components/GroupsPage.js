@@ -43,7 +43,7 @@ function GroupsPage() {
           groups.map((group, index) => (
             <div key={index} className="group-item">
               <span onClick={() => handleTeamClick(index)}>{group.name}</span>
-              <button onClick={() => handleEdit(group)} className="edit-button">
+              <button onClick={() => handleEdit(group)} className="edit-buttons">
                 <FontAwesomeIcon icon={faEdit} />
               </button>
             </div>
