@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
-import "../styles/ListPages.css";
+import { useNavigate } from "react-router-dom";
+import "../styles/AllPlayersPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import debounce from "lodash/debounce";
 
-function ListPage() {
-  const { groupId } = useParams();
+function AllPlayersPage() {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const [categoryGroup, setCategoryGroup] = useState(
-    state?.categoryGroup || ""
-  );
   const [players, setPlayers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [editingPlayer, setEditingPlayer] = useState({
     firstName: "",
     lastName: "",
-    categoryGroupsId:"",
-    duesId: 1,
+    categoryGroupsId: "",
     birtDay: "",
     address: "",
     phoneNumber: "",
@@ -38,16 +34,16 @@ function ListPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
+    fetchPlayers();
+  }, []);
+
+  const fetchPlayers = (query = "") => {
+    setLoading(true);
     axios
-      .get(`https://localhost:7114/api/User?page=1&pageSize=10`)
+      .get(`https://localhost:7114/api/User?page=1&pageSize=10&search=${query}`)
       .then((response) => {
         if (Array.isArray(response.data.data)) {
-          const players = response.data.data.filter(
-            (player) =>
-              player.categoryGroupsId === parseInt(groupId) &&
-              player.categoryGroups === categoryGroup
-          );
-          setPlayers(players);
+          setPlayers(response.data.data);
         } else {
           console.error("Beklenmeyen veri formatı:", response.data);
         }
@@ -57,7 +53,18 @@ function ListPage() {
         console.error("Veri çekme hatası:", error);
         setLoading(false);
       });
-  }, [groupId, categoryGroup]);
+  };
+
+  const debouncedFetchPlayers = useCallback(
+    debounce((query) => fetchPlayers(query), 300),
+    []
+  );
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    debouncedFetchPlayers(query);
+  };
 
   const handleEdit = (player) => {
     setEditingPlayer({ ...player });
@@ -66,30 +73,13 @@ function ListPage() {
 
   const handleSave = () => {
     const updatedPlayer = {
-      id: editingPlayer.id,
-      firstName: editingPlayer.firstName,
-      lastName: editingPlayer.lastName,
-      categoryGroupsId: parseInt(groupId),
-      duesId: 1,
-      birtDay: editingPlayer.birtDay,
-      tcNo: editingPlayer.tcNo,
-      birthPlace: editingPlayer.birthPlace,
-      school: editingPlayer.school,
-      height: editingPlayer.height,
-      weight: editingPlayer.weight,
-      healthProblem: editingPlayer.healthProblem,
-      isAcceptedWhatsappGroup: editingPlayer.isAcceptedWhatsappGroup === "katıldı",
-      isAcceptedMotherWhatsappGroup: editingPlayer.isAcceptedMotherWhatsappGroup === "katıldı",
-      isAcceptedFatherWhatsappGroup: editingPlayer.isAcceptedFatherWhatsappGroup === "katıldı",
-      address: editingPlayer.address,
-      phoneNumber: editingPlayer.phoneNumber,
-      motherName: editingPlayer.motherName,
-      motherPhoneNumber: editingPlayer.motherPhoneNumber,
-      fatherName: editingPlayer.fatherName,
-      fatherPhoneNumber: editingPlayer.fatherPhoneNumber,
-      email: editingPlayer.email,
-      password: editingPlayer.password,
-      isDeleted: false
+      ...editingPlayer,
+      isAcceptedWhatsappGroup:
+        editingPlayer.isAcceptedWhatsappGroup === "katıldı",
+      isAcceptedFatherWhatsappGroup:
+        editingPlayer.isAcceptedFatherWhatsappGroup === "katıldı",
+      isAcceptedMotherWhatsappGroup:
+        editingPlayer.isAcceptedMotherWhatsappGroup === "katıldı",
     };
 
     axios
@@ -124,26 +114,33 @@ function ListPage() {
       });
   };
 
-  const handleChange = (e, playerId, field) => {
+  const handleChange = (e, field) => {
     setEditingPlayer({
       ...editingPlayer,
       [field]: e.target.value,
     });
   };
 
-  if (loading) {
-    return <div>Yükleniyor...</div>;
-  }
-
   return (
-    <div className="list-page">
+    <div className="all-players-page">
       <button
         className="back-button"
-        onClick={() => navigate(state?.from || -1)}
+        onClick={() => navigate(-1)}
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
-      <h1>Oyuncu Listesi - {groupId}</h1>
+      <h1>Tüm Oyuncular</h1>
+
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="İsim veya Soyisim ile Ara..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="search-input"
+        />
+      </div>
+
       <div className="table-container">
         <table>
           <thead>
@@ -186,13 +183,25 @@ function ListPage() {
                 <td>{player.email}</td>
                 <td>{player.healthProblem || "Yok"}</td>
                 <td>
-                  <input type="checkbox" checked={player.isAcceptedWhatsappGroup === "katıldı"} readOnly />
+                  <input
+                    type="checkbox"
+                    checked={player.isAcceptedWhatsappGroup === "katıldı"}
+                    readOnly
+                  />
                 </td>
                 <td>
-                  <input type="checkbox" checked={player.isAcceptedFatherWhatsappGroup === "katıldı"} readOnly />
+                  <input
+                    type="checkbox"
+                    checked={player.isAcceptedFatherWhatsappGroup === "katıldı"}
+                    readOnly
+                  />
                 </td>
                 <td>
-                  <input type="checkbox" checked={player.isAcceptedMotherWhatsappGroup === "katıldı"} readOnly />
+                  <input
+                    type="checkbox"
+                    checked={player.isAcceptedMotherWhatsappGroup === "katıldı"}
+                    readOnly
+                  />
                 </td>
                 <td>
                   <button
@@ -228,9 +237,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.firstName || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "firstName")
-                      }
+                      onChange={(e) => handleChange(e, "firstName")}
                     />
                   </td>
                 </tr>
@@ -242,23 +249,19 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.lastName || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "lastName")
-                      }
+                      onChange={(e) => handleChange(e, "lastName")}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <label>Grup İd:</label>
+                    <label>Grup ID:</label>
                   </td>
                   <td>
                     <input
                       type="text"
                       value={editingPlayer.categoryGroupsId || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "categoryGroupsId")
-                      }
+                      onChange={(e) => handleChange(e, "categoryGroupsId")}
                     />
                   </td>
                 </tr>
@@ -270,9 +273,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.birtDay || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "birtDay")
-                      }
+                      onChange={(e) => handleChange(e, "birtDay")}
                     />
                   </td>
                 </tr>
@@ -284,23 +285,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.phoneNumber || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "phoneNumber")
-                      }
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label>Okul:</label>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      value={editingPlayer.school || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "school")
-                      }
+                      onChange={(e) => handleChange(e, "phoneNumber")}
                     />
                   </td>
                 </tr>
@@ -312,9 +297,19 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.address || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "address")
-                      }
+                      onChange={(e) => handleChange(e, "address")}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Okul:</label>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={editingPlayer.school || ""}
+                      onChange={(e) => handleChange(e, "school")}
                     />
                   </td>
                 </tr>
@@ -326,9 +321,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.height || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "height")
-                      }
+                      onChange={(e) => handleChange(e, "height")}
                     />
                   </td>
                 </tr>
@@ -340,9 +333,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.weight || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "weight")
-                      }
+                      onChange={(e) => handleChange(e, "weight")}
                     />
                   </td>
                 </tr>
@@ -354,9 +345,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.motherName || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "motherName")
-                      }
+                      onChange={(e) => handleChange(e, "motherName")}
                     />
                   </td>
                 </tr>
@@ -368,9 +357,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.motherPhoneNumber || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "motherPhoneNumber")
-                      }
+                      onChange={(e) => handleChange(e, "motherPhoneNumber")}
                     />
                   </td>
                 </tr>
@@ -382,9 +369,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.fatherName || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "fatherName")
-                      }
+                      onChange={(e) => handleChange(e, "fatherName")}
                     />
                   </td>
                 </tr>
@@ -396,9 +381,7 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.fatherPhoneNumber || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "fatherPhoneNumber")
-                      }
+                      onChange={(e) => handleChange(e, "fatherPhoneNumber")}
                     />
                   </td>
                 </tr>
@@ -410,9 +393,7 @@ function ListPage() {
                     <input
                       type="email"
                       value={editingPlayer.email || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "email")
-                      }
+                      onChange={(e) => handleChange(e, "email")}
                     />
                   </td>
                 </tr>
@@ -424,9 +405,19 @@ function ListPage() {
                     <input
                       type="text"
                       value={editingPlayer.healthProblem || ""}
-                      onChange={(e) =>
-                        handleChange(e, editingPlayer.id, "healthProblem")
-                      }
+                      onChange={(e) => handleChange(e, "healthProblem")}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Baba İletişim:</label>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={editingPlayer.fatherPhoneNumber || ""}
+                      onChange={(e) => handleChange(e, "fatherPhoneNumber")}
                     />
                   </td>
                 </tr>
@@ -492,13 +483,9 @@ function ListPage() {
                 </tr>
               </tbody>
             </table>
-            <div className="form-actions">
-              <button type="button" onClick={handleSave}>
-                Kaydet
-              </button>
-              <button type="button" onClick={() => setIsEditing(false)}>
-                İptal
-              </button>
+            <div className="edit-buttons">
+              <button type="button" onClick={handleSave}>Kaydet</button>
+              <button type="button" onClick={() => setIsEditing(false)}>İptal</button>
             </div>
           </form>
         </div>
@@ -506,4 +493,5 @@ function ListPage() {
     </div>
   );
 }
-export default ListPage;
+
+export default AllPlayersPage;

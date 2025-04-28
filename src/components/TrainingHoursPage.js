@@ -1,37 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../styles/TrainingHoursPage.css";
 
 function TrainingHoursPage() {
-  const { groupId } = useParams();
-  const [group, setGroup] = useState(null);
+  const { id } = useParams(); // URL'den gelen kategori ID
+  const [trainingHours, setTrainingHours] = useState(null); // Başlangıçta null olarak ayarlandı
   const [showNewDayForm, setShowNewDayForm] = useState(false);
   const [newDay, setNewDay] = useState("");
   const [newStartTime, setNewStartTime] = useState("");
   const [newEndTime, setNewEndTime] = useState("");
   const navigate = useNavigate();
 
+  const dayToNumber = {
+    Pazar: 0,
+    Pazartesi: 1,
+    Salı: 2,
+    Çarşamba: 3,
+    Perşembe: 4,
+    Cuma: 5,
+    Cumartesi: 6,
+  };
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/groups/${groupId}`)
+    if (!id) {
+      console.error("Grup ID'si tanımlı değil!");
+      return;
+    }
+
+    axiosInstance
+      .get(`/TrainingHours?page=1&pageSize=10`)
       .then((response) => {
-        setGroup(response.data);
+        const data = response.data.data || [];
+        const filteredData = data.filter((item) => item.categoryGroupsId === parseInt(id, 10));
+        setTrainingHours(filteredData);
       })
       .catch((error) => {
         console.error("Antrenman saatleri alınırken hata oluştu:", error);
       });
-  }, [groupId]);
-
-  if (!group) {
-    return <div>Loading...</div>;
-  }
-
-  const handleEdit = (day) => {
-    navigate(`/edit-training-hours/${groupId}/${day}`);
-  };
+  }, [id]);
 
   const handleAddNewDay = () => {
     if (!newDay || newDay === "Gün Seçin" || !newStartTime || !newEndTime) {
@@ -40,25 +49,50 @@ function TrainingHoursPage() {
     }
 
     const newTrainingHour = {
-      day: newDay,
-      time: `${newStartTime} - ${newEndTime}`,
+      trainingDate: dayToNumber[newDay],
+      trainingStartTime: `${newStartTime}:00`,
+      trainingFinishTime: `${newEndTime}:00`,
+      categoryGroupsId: parseInt(id, 10),
     };
 
-    axios
-      .patch(`http://localhost:5000/groups/${groupId}`, {
-        trainingHours: [...group.trainingHours, newTrainingHour],
-      })
+    console.log("Gönderilen veri:", newTrainingHour);
+
+    axiosInstance
+      .post(`/TrainingHours/CreateTrainingHourse`, newTrainingHour)
       .then((response) => {
-        setGroup((prevGroup) => ({
-          ...prevGroup,
-          trainingHours: [...prevGroup.trainingHours, newTrainingHour],
-        }));
+        const added = response.data;
+        setTrainingHours((prev) => [...prev, added]);
         setShowNewDayForm(false);
+        setNewDay("");
+        setNewStartTime("");
+        setNewEndTime("");
         alert("Yeni gün başarıyla eklendi!");
       })
       .catch((error) => {
         console.error("Yeni gün eklenirken hata oluştu:", error);
+        alert("Bir hata oluştu, lütfen tekrar deneyin.");
       });
+  };
+
+  const handleEdit = (trainingId, trainingDate) => {
+    navigate(`/edit-training-hours/${id}/${trainingDate}`, {
+      state: { trainingId },
+    });
+  };
+
+  const handleDelete = (trainingId) => {
+    if (window.confirm("Bu günü silmek istediğinize emin misiniz?")) {
+      axiosInstance
+        .delete(`/TrainingHours/DeleteTrainingHours?id=${trainingId}`)
+        .then(() => {
+          alert("Gün başarıyla silindi!");
+          setTrainingHours((prev) => prev.filter((item) => item.id !== trainingId));
+        })
+        .catch((error) => {
+          console.error("Gün silinirken hata oluştu:", error);
+          alert("Bir hata oluştu, lütfen tekrar deneyin.");
+        });
+    }
   };
 
   return (
@@ -68,20 +102,36 @@ function TrainingHoursPage() {
       </button>
 
       <h1>Balkan Yeşilbağlar Spor Kulübü</h1>
-      <h2>{group.name}</h2>
+      <h2>Grup ID: {id}</h2>
       <h3>Antrenman Saatleri</h3>
-      <ul className="training-hours-list">
-        {group.trainingHours.map(({ day, time }, index) => (
-          <li key={index} className="training-hours-item">
-            <span>
-              {day}: {time}
-            </span>
-            <button className="edit-button" onClick={() => handleEdit(day)}>
-              ✏️
-            </button>
-          </li>
-        ))}
-      </ul>
+
+      {trainingHours === null ? (
+        <div>Loading...</div>
+      ) : trainingHours.length === 0 ? (
+        <div>Henüz antrenman saati eklenmedi.</div>
+      ) : (
+        <ul className="training-hours-list">
+          {trainingHours.map(({ id: trainingId, trainingDate, trainingStartTime, trainingFinishTime }) => (
+            <li key={trainingId} className="training-hours-item">
+              <span>
+                {trainingDate}: {trainingStartTime} - {trainingFinishTime}
+              </span>
+              <button
+                className="edit-button"
+                onClick={() => handleEdit(trainingId, trainingDate)}
+              >
+                <FontAwesomeIcon icon={faEdit} /> Düzenle
+              </button>
+              <button
+                className="delete-button"
+                onClick={() => handleDelete(trainingId)}
+              >
+                <FontAwesomeIcon icon={faTrash} /> Sil
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <button
         className="trainingButton add-day-button"
@@ -101,7 +151,7 @@ function TrainingHoursPage() {
               onChange={(e) => setNewDay(e.target.value)}
             >
               <option value="Gün Seçin">Gün Seçin</option>
-              {["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"].map((d) => (
+              {Object.keys(dayToNumber).map((d) => (
                 <option key={d} value={d}>
                   {d}
                 </option>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "../styles/EditGroupPage.css";
@@ -20,36 +20,37 @@ function EditGroupPage() {
 
   const handleSave = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/groups/${id}`);
-      const existingGroup = response.data;
-
-      const newId = `group_${groupName.toLowerCase().replace(/\s+/g, "")}`;
-
       const updatedGroup = {
-        ...existingGroup,
-        name: groupName,
-        id: newId,
+        id: id,  // API'ye gönderdiğiniz id
+        age: groupName,  // Güncellenmiş yaş
+        isDeleted: false,  // isDeleted durumunu burada tutuyoruz
+        trainingHours: []  // Güncellemek istediğiniz diğer alanlar
       };
-
-      await axios.delete(`http://localhost:5000/groups/${id}`);
-      await axios.post(`http://localhost:5000/groups`, updatedGroup);
-
+  
+      const response = await axiosInstance.put(`/CategoryGroups/${id}`, updatedGroup);
+      console.log(response.data); // Dönüş verilerini kontrol edin
+  
       setMessage("Grup başarıyla kaydedildi.");
       setTimeout(() => {
         navigate("/groups");
-      }, 800);
+      }, 100);
     } catch (error) {
       console.error("Grup güncellenirken hata oluştu:", error);
     }
   };
+  
+  
+  
+  
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/groups/${id}`);
+      await axiosInstance.delete(`/CategoryGroups/${id}`);
+
       setMessage("Grup başarıyla silindi.");
       setTimeout(() => {
         navigate("/groups");
-      }, 800);
+      }, 100);
     } catch (error) {
       console.error("Grup silinirken hata oluştu:", error);
     }

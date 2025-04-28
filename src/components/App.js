@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./HomePage";
 import ClubLogin from "./ClubLogin";
 import GroupsPage from "./GroupsPage";
+import AllPlayersPage from "./AllPlayersPage";
 import AddGroupPage from "./AddGroupPage";
 import GroupDetailPage from "./GroupDetailPage";
 import EditGroupPage from "./EditGroupPage";
@@ -28,11 +29,12 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/club-login" element={<ClubLogin />} />
         <Route path="/groups" element={<GroupsPage />} />
+        <Route path="/all-players" element={<AllPlayersPage />} />
         <Route path="/edit-group/:id" element={<EditGroupPage />} />
         <Route path="/add-group" element={<AddGroupPage />} />
         <Route path="/group/:teamId" element={<GroupDetailPage />} />
-        <Route path="/training-hours/:groupId" element={<TrainingHoursPage />} />
-        <Route path="/edit-training-hours/:groupId/:day" element={<EditTrainingHoursPage />} />
+        <Route path="/training-hours/:id" element={<TrainingHoursPage />} />
+        <Route path="/edit-training-hours/:id/:day" element={<EditTrainingHoursPage />} />
         <Route path="/list-page/:groupId" element={<ListPage />} />
         <Route path="/fee/:groupId" element={<FeePage />} />
         <Route path="/attendance/:groupId" element={<AttendancePage />} />

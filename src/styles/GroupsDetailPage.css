@@ -90,6 +90,28 @@
   color: gray;
 }
 
+.all-players-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.all-players-button {
+  background-color: #1f8ef1;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.all-players-button:hover {
+  background-color: #0d6efd;
+}
+
+
 @media (max-width: 768px) {
   .group-detail-page {
     height: auto;

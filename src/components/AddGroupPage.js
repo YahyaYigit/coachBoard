@@ -10,6 +10,7 @@ function AddGroupPage() {
   const { state } = useLocation();
   const [groupName, setGroupName] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,20 +21,22 @@ function AddGroupPage() {
     }
 
     const newGroup = {
-      id: `group_${groupName.toLowerCase().replace(/\s+/g, '')}`, 
-      name: groupName,
+      age: groupName,
       trainingHours: [],
-      players: []
+      isDeleted: false
     };
 
     try {
-      await axios.post('http://localhost:5000/groups', newGroup);
+      await axios.post('https://localhost:7114/api/CategoryGroups', newGroup);
       setMessage("Grup başarıyla eklendi!");
+      setError('');
       setTimeout(() => {
         navigate('/groups');
-      }, 800);
+      }, 100);
     } catch (error) {
       console.error("Grup eklenirken hata oluştu:", error);
+      setError("Grup eklenirken bir hata oluştu. Lütfen tekrar deneyin.");
+      setMessage('');
     }
   };
 
@@ -55,6 +58,7 @@ function AddGroupPage() {
         <button className="submit-buttons" type="submit">Ekle</button>
       </form>
       {message && <div className="success-message">{message}</div>}
+      {error && <div className="error-message">{error}</div>}
       <button className="cancel-button" onClick={() => navigate('/groups')}>İptal</button>
     </div>
   );

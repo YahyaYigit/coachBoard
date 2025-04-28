@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance"; 
 import "../styles/AttendancePage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -9,31 +9,28 @@ const AttendancePage = () => {
   const { groupId } = useParams();
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [groups, setGroups] = useState([]);
   const [players, setPlayers] = useState([]);
   const [attendanceDate, setAttendanceDate] = useState("");
   const [attendanceStatus, setAttendanceStatus] = useState({});
-  const [selectedGroup, setSelectedGroup] = useState(groupId || "");
   const [groupName, setGroupName] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/groups").then((response) => {
-      setGroups(response.data);
-      if (response.data.length > 0 && !selectedGroup) {
-        setSelectedGroup(response.data[0].id);
+    axiosInstance.get("/User?page=1&pageSize=100").then((response) => {
+      const allPlayers = response.data.data;
+
+      const filteredPlayers = allPlayers.filter(
+        (player) => player.categoryGroupsId === parseInt(groupId)
+      );
+
+      setPlayers(filteredPlayers);
+
+      if (filteredPlayers.length > 0) {
+        setGroupName(`Grup ID: ${groupId}`);
+      } else {
+        setGroupName("Oyuncu bulunamadı");
       }
     });
-  }, []);
-
-  useEffect(() => {
-    if (selectedGroup) {
-      const group = groups.find((group) => group.id === selectedGroup);
-      if (group) {
-        setPlayers(group.players || []);
-        setGroupName(group.name);
-      }
-    }
-  }, [selectedGroup, groups]);
+  }, [groupId]);
 
   const handleAttendanceChange = (playerId, status) => {
     setAttendanceStatus((prevStatus) => ({
@@ -42,29 +39,43 @@ const AttendancePage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    const formattedDate = new Date(attendanceDate).toISOString();
+  
+    try {
+      for (const player of players) {
+        const status = attendanceStatus[player.id];
+        const statusEnum = status === "Geldi" ? 1 : status === "Gelmedi" ? 2 : null;
+  
+        if (statusEnum === null) continue; // seçilmemişse atla
+  
+        const newAttendance = {
+          userId: player.id,
+          date: formattedDate,
+          status: statusEnum,
+        };
+        console.log("Gönderilen veri:", newAttendance);
 
-    const newAttendance = {
-      groupId: selectedGroup,
-      date: attendanceDate,
-      players: players.map((player) => ({
-        playerId: player.id,
-        firstName: player.firstName,
-        lastName: player.lastName,
-        status: attendanceStatus[player.id] || "belirtilmedi",
-      })),
-    };
-
-    axios
-      .post("http://localhost:5000/attendances", newAttendance)
-      .then(() => {
-        alert("Yoklama başarıyla kaydedildi!");
-        setAttendanceDate("");
-        setAttendanceStatus({});
-      })
-      .catch((error) => console.error("Error saving attendance:", error));
+  
+        await axiosInstance.post("/Attendance/CreateAttendance", newAttendance);
+      }
+  
+      alert("Tüm yoklamalar başarıyla kaydedildi!");
+      setAttendanceDate("");
+      setAttendanceStatus({});
+    } catch (error) {
+      const errorMessage = error.response
+        ? `API Error: ${JSON.stringify(error.response.data)}`
+        : `Error: ${error.message}`;
+      console.error(errorMessage);
+      alert("Bir hata oluştu. Lütfen kontrol edin.");
+      
+    }
   };
+  
+  
 
   return (
     <div className="attendance-page">
@@ -117,17 +128,6 @@ const AttendancePage = () => {
                       />
                       Gelmedi
                     </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name={`attendance-${player.id}`}
-                        checked={attendanceStatus[player.id] === "belirtilmedi"}
-                        onChange={() =>
-                          handleAttendanceChange(player.id, "belirtilmedi")
-                        }
-                      />
-                      Belirtilmedi
-                    </label>
                   </div>
                 ))
               ) : (
@@ -144,7 +144,7 @@ const AttendancePage = () => {
 
       <button
         className="past-attendance-button"
-        onClick={() => navigate(`/past-attendance/${selectedGroup}`)}
+        onClick={() => navigate(`/past-attendance/${groupId}`)}
       >
         Geçmiş Yoklamaları Görüntüle
       </button>

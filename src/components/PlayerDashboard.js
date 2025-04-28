@@ -4,39 +4,47 @@ import "../styles/PlayerDashboard.css";
 
 function PlayerDashboard() {
   const navigate = useNavigate();
-  const [players, setPlayer] = useState(null);
+  const [player, setPlayer] = useState(null); // Oyuncu bilgisi
+  const [loading, setLoading] = useState(true); // Yüklenme durumu
 
   useEffect(() => {
-    const storedPlayer = localStorage.getItem("players");
-    if (storedPlayer) {
-      const playerData = JSON.parse(storedPlayer);
-      setPlayer(playerData);
-      localStorage.setItem("loggedInPlayer", JSON.stringify(playerData));
-      localStorage.setItem("role", playerData.role || "player");
-    }
-  }, []);
+    const storedPlayer = localStorage.getItem("player");
 
-  if (!players) {
+    if (storedPlayer) {
+      const playerData = JSON.parse(storedPlayer); // Giriş yapan oyuncunun bilgilerini alıyoruz
+      setPlayer(playerData); // Oyuncu bilgilerini state'e kaydediyoruz
+      setLoading(false); // Yüklenme durumu tamamlandı
+    } else {
+      navigate("/login"); // Eğer giriş yapılmamışsa login sayfasına yönlendir
+    }
+  }, [navigate]);
+
+  if (loading) {
     return <div className="loading">Yükleniyor...</div>;
+  }
+
+  if (!player) {
+    return <div className="error">Oyuncu bilgisi bulunamadı.</div>;
   }
 
   return (
     <div className="player-dashboard">
-      <h2>Takım: {players.team}</h2>
+      <h2>Takım: {player.categoryGroups}</h2>
       <h1>
-        Oyuncu: {players.firstName} {players.lastName}
+        Oyuncu: {player.firstName} {player.lastName}
       </h1>
+      <h3>Grup ID: {player.categoryGroupsId}</h3>
 
       <div className="buttons-container">
         <button
           className="action-button"
-          onClick={() => navigate(`/trainingHours/:team${players.team}`)}
+          onClick={() => navigate(`/trainingHours/${player.categoryGroupsId}`)}
         >
           Antrenman Saatlerim
         </button>
         <button
           className="action-button"
-          onClick={() => navigate(`/player-attendance/${players.team}`)}
+          onClick={() => navigate(`/player-attendance/${player.categoryGroupsId}`)}
         >
           Yoklamalarım
         </button>
@@ -45,7 +53,7 @@ function PlayerDashboard() {
           onClick={() => {
             const role = localStorage.getItem("role");
             if (role === "admin") {
-              navigate(`/admin/fees/${players.team}`);
+              navigate(`/admin/fees/${player.categoryGroupsId}`);
             } else {
               navigate("/player/fees");
             }

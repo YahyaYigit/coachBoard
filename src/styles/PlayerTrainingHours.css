@@ -4,13 +4,16 @@ body {
 }
 
 .training-hours {
-  background-color: #f6f6f6 ;
+  background-color: #f6f6f6;
   color: black;
   text-align: center;
   padding: 40px;
   border-radius: 8px;
   max-width: 600px;
   margin: 130px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 h1 {

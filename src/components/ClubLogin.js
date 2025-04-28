@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/ClubLogin.css";
 
 const ClubLogin = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -13,19 +13,21 @@ const ClubLogin = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.get("http://localhost:5000/users");
+      const response = await axios.post("https://localhost:7114/api/Authentication/login", {
+        email,
+        password,
+      });
 
-      const user = response.data.find(
-        (user) => user.username === username && user.password === password
-      );
+      const { user } = response.data;
 
-      if (user) {
+      if (user && user.isAdmin) {
         console.log("Giriş başarılı!");
         navigate("/groups");
       } else {
-        setError("Kullanıcı adı veya şifre hatalı!");
+        setError("Kullanıcı adı veya şifre hatalı ya da yetkiniz yok!");
       }
     } catch (err) {
+      console.error("API isteği sırasında hata oluştu:", err);
       setError("Bir hata oluştu. Lütfen tekrar deneyin.");
     }
   };
@@ -36,12 +38,12 @@ const ClubLogin = () => {
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleLogin}>
         <div className="input-group">
-          <label htmlFor="username">Kullanıcı Adı</label>
+          <label htmlFor="email">E-Posta</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>

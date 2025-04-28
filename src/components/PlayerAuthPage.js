@@ -14,56 +14,37 @@ function PlayerAuthPage() {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const normalizeString = (str) => {
-    return str
-      .toLowerCase()
-      .replace(/ı/g, 'i')
-      .replace(/İ/g, 'i')
-      .replace(/ç/g, 'c')
-      .replace(/ö/g, 'o')
-      .replace(/ü/g, 'u')
-      .replace(/ş/g, 's')
-      .replace(/ğ/g, 'g');
-  };
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`http://localhost:5000/groups`);
-
-      let foundPlayer = null;
-      let foundGroup = null;
-
-      response.data.forEach((group) => {
-        if (group.players && Array.isArray(group.players)) {
-          const player = group.players.find(
-            (p) =>
-              normalizeString(p.email).trim() === normalizeString(loginData.email).trim() &&
-              String(p.password).trim() === loginData.password.trim()
-          );
-
-          if (player) {
-            foundPlayer = player;
-            foundGroup = group.name;
-          }
-        }
+      const response = await axios.post("https://localhost:7114/api/Authentication/login", {
+        email: loginData.email,
+        password: loginData.password,
       });
-
-      if (foundPlayer) {
+  
+      const { user } = response.data;
+  
+      if (user && !user.isAdmin) {
         alert("Giriş başarılı!");
-
-        const playerData = { ...foundPlayer, team: foundGroup };
-        localStorage.setItem("players", JSON.stringify(playerData));
-
+  
+        // Player bilgilerini localStorage'a kaydediyoruz
+        localStorage.setItem("player", JSON.stringify(user));
+  
+        // Eğer categoryGroups bilgisi varsa, onu da kaydedelim
+        if (user.categoryGroups) {
+          localStorage.setItem("categoryGroups", JSON.stringify(user.categoryGroups));
+        }
+  
         navigate("/playerDashboard");
       } else {
-        setError("E-posta veya şifre hatalı!");
+        setError("E-posta veya şifre hatalı ya da yetkiniz yok!");
       }
     } catch (err) {
       console.error("Giriş hatası:", err);
       setError("Giriş yapılamadı!");
     }
   };
+  
 
   const handlePlayerRegisterPage = () => {
     navigate("/playerRegister");

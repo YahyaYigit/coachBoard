@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 import "../styles/PlayerTrainingHours.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -12,16 +12,17 @@ function PlayerTrainingHours() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/groups?trainingHours=${team}`)
+    console.log("team parametresi:", team);
+
+    axiosInstance
+      .get(`/TrainingHours?categoryGroupsId=${team}`)
       .then((response) => {
-        const group = response.data[0];
-        if (group) {
-          setTrainingHours(group.trainingHours);
-        }
+        console.log("API'den gelen veri:", response.data);
+        const data = response.data.data || [];
+        setTrainingHours(data);
       })
       .catch((error) => {
-        console.error("Antreman saatleri alınamadı:", error);
+        console.error("Antrenman saatleri alınamadı:", error);
       })
       .finally(() => {
         setLoading(false);
@@ -29,7 +30,7 @@ function PlayerTrainingHours() {
   }, [team]);
 
   if (loading) {
-    return <div className="loading">Antreman saatleri yükleniyor...</div>;
+    return <div className="loading">Antrenman saatleri yükleniyor...</div>;
   }
 
   return (
@@ -37,17 +38,19 @@ function PlayerTrainingHours() {
       <button className="back-button" onClick={() => navigate(-1)}>
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
-      <h1>{team} Grubu İçin Antreman Saatleri</h1>
+      <h1>{team} Grubu İçin Antrenman Saatleri</h1>
       {trainingHours && trainingHours.length > 0 ? (
         <ul className="training-hours-list">
-          {trainingHours.map((training, index) => (
-            <li key={index} className="training-hours-item">
-              <span>{training.day}:</span> {training.time}
+          {trainingHours.map((training) => (
+            <li key={training.id} className="training-hours-item">
+              <span>
+                {training.trainingDate}: {training.trainingStartTime} - {training.trainingFinishTime}
+              </span>
             </li>
           ))}
         </ul>
       ) : (
-        <p>Antreman saati bulunmamaktadır.</p>
+        <p>Antrenman saati bulunmamaktadır.</p>
       )}
     </div>
   );

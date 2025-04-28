@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "../styles/GroupsDetailPage.css";
@@ -15,8 +15,8 @@ function GroupsDetailPage() {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/groups");
-        setGroups(response.data);
+        const response = await axiosInstance.get("/CategoryGroups?page=1&pageSize=10");
+        setGroups(response.data.data);
       } catch (error) {
         console.error("Grup verileri alınamadı", error);
       }
@@ -27,14 +27,14 @@ function GroupsDetailPage() {
 
   useEffect(() => {
     if (groups.length > 0) {
-      const jsonServerId = groups[teamId - 1]?.id;
+      const groupId = groups[teamId - 1]?.id;
       
-      if (!jsonServerId) {
+      if (!groupId) {
         console.error("Geçersiz grup ID");
         return;
       }
 
-      axios.get(`http://localhost:5000/groups/${jsonServerId}`)
+      axiosInstance.get(`/CategoryGroups/${groupId}`)
         .then(response => {
           setGroup(response.data);
         })
@@ -43,6 +43,10 @@ function GroupsDetailPage() {
         });
     }
   }, [teamId, groups]);
+
+  const handleNavigate = (path) => {
+    navigate(path, { state: { categoryGroup: group.age } });
+  };
 
   if (!group) {
     return <div>Loading...</div>;
@@ -54,14 +58,16 @@ function GroupsDetailPage() {
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
 
-      <h1>{group.name} - Balkan Yeşilbağlar Spor Kulübü</h1>
-      <h2>{group.name}</h2>
+      <h1>{group.age} - Balkan Yeşilbağlar Spor Kulübü</h1>
+      <h2>{group.age}</h2>
+      <h3>{group.id}</h3>
+
 
       <div className="buttons-container">
-        <button className="action-button" onClick={() => navigate(`/training-hours/${group.id}`)}>Antreman Saatleri</button>
-        <button className="action-button" onClick={() => navigate(`/list-page/${group.id}`)}>Listem</button>
-        <button className="action-button" onClick={() => navigate(`/fee/${group.id}`)}>Aidat</button>
-        <button className="action-button" onClick={() => navigate(`/attendance/${group.id}`)}>Yoklama</button>
+        <button className="action-button" onClick={() => handleNavigate(`/training-hours/${group.id}`)}>Antreman Saatleri</button>
+        <button className="action-button" onClick={() => handleNavigate(`/list-page/${group.id}`)}>Listem</button>
+        <button className="action-button" onClick={() => handleNavigate(`/fee/${group.id}`)}>Aidat</button>
+        <button className="action-button" onClick={() => handleNavigate(`/attendance/${group.id}`)}>Yoklama</button>
       </div>
 
       <button className="notify-button">Bu gruba bildirim gönder</button>

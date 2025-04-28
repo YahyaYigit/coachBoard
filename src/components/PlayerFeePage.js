@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -8,75 +7,49 @@ import "../styles/PlayerFeePages.css";
 function PlayerFeePage() {
   const navigate = useNavigate();
   const [loggedInPlayer, setLoggedInPlayer] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState("Tümü");
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [playerFees, setPlayerFees] = useState([]);
-  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedPlayer = localStorage.getItem("loggedInPlayer");
-
+    const storedPlayer = localStorage.getItem("player");
     if (storedPlayer) {
       const playerData = JSON.parse(storedPlayer);
       setLoggedInPlayer(playerData);
 
-      axios
-        .get(`http://localhost:5000/groups/?name=${playerData.team}`)
-        .then((response) => {
-          const player = response.data[0]?.players.find(
-            (p) => p.id === playerData.id
-          );
-
-          if (player && player.fees) {
-            const fees = [];
-            const methods = [];
-            if (selectedMonth === "Tümü") {
-              for (const month of months) {
-                fees.push(player.fees[selectedYear]?.[month]?.amount || "0");
-                methods.push(
-                  player.fees[selectedYear]?.[month]?.paymentMethod ||
-                    "Belirtilmedi"
-                );
-              }
-            } else {
-              fees.push(player.fees[selectedYear]?.[selectedMonth]?.amount || "0");
-              methods.push(
-                player.fees[selectedYear]?.[selectedMonth]?.paymentMethod ||
-                  "Belirtilmedi"
-              );
-            }
-            setPlayerFees(fees);
-            setPaymentMethods(methods);
-          } else {
-            setPlayerFees(["0"]);
-            setPaymentMethods(["Belirtilmedi"]);
-          }
-        })
-        .catch((error) => console.error("Veri çekme hatası:", error));
+      if (playerData && playerData.monthlyFees) {
+        const fees = Object.entries(playerData.monthlyFees).map(([key, value]) => {
+          const [month, year] = key.split("-");
+          const [paymentType, fee] = value.split(" - ");
+          return {
+            month: parseInt(month, 10),
+            year: parseInt(year, 10),
+            paymentType: paymentType.trim(),
+            fee: parseFloat(fee.replace(".", "").replace(",", ".")),
+          };
+        });
+        setPlayerFees(fees);
+      }
+      setLoading(false);
+    } else {
+      console.error("Kullanıcı bilgileri bulunamadı.");
+      navigate("/login");
     }
-  }, [selectedMonth, selectedYear]);
-
-  const months = [
-    "Ocak",
-    "Şubat",
-    "Mart",
-    "Nisan",
-    "Mayıs",
-    "Haziran",
-    "Temmuz",
-    "Ağustos",
-    "Eylül",
-    "Ekim",
-    "Kasım",
-    "Aralık",
-  ];
+  }, [navigate]);
 
   const calculateTotalFee = () => {
-    return playerFees.reduce((total, fee) => total + parseFloat(fee), 0);
+    return (playerFees || [])
+      .filter((fee) => fee.year === selectedYear && fee.month === selectedMonth)
+      .reduce((total, fee) => total + fee.fee, 0);
   };
 
-  if (!loggedInPlayer) {
+  if (loading) {
     return <div className="loading">Yükleniyor...</div>;
+  }
+
+  if (!loggedInPlayer) {
+    return <div className="error">Kullanıcı bilgisi bulunamadı.</div>;
   }
 
   return (
@@ -95,9 +68,9 @@ function PlayerFeePage() {
             <label>Yıl: </label>
             <select
               value={selectedYear}
-              onChange={(e) => setSelectedYear(e.target.value)}
+              onChange={(e) => setSelectedYear(Number(e.target.value))}
             >
-              {["2025", "2026", "2027", "2028"].map((year) => (
+              {[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030].map((year) => (
                 <option key={year} value={year}>
                   {year}
                 </option>
@@ -109,12 +82,11 @@ function PlayerFeePage() {
             <label>Aidat Ayı: </label>
             <select
               value={selectedMonth}
-              onChange={(e) => setSelectedMonth(e.target.value)}
+              onChange={(e) => setSelectedMonth(Number(e.target.value))}
             >
-              <option value="Tümü">Tümü</option>
-              {months.map((month) => (
+              {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
                 <option key={month} value={month}>
-                  {month}
+                  {month.toString().padStart(2, "0")}
                 </option>
               ))}
             </select>
@@ -124,26 +96,19 @@ function PlayerFeePage() {
 
       <h3>Verilen Ücretler</h3>
       <div className="fee-container">
-        {selectedMonth === "Tümü"
-          ? months.map((month, index) => (
-              <div key={month} className="fee-item">
-                <span className="month-name">{month}</span>
-                <span className="fee-amount">{playerFees[index]} TL</span>
-                <span className="payment-method">{paymentMethods[index]}</span>
-              </div>
-            ))
-          : playerFees.map((fee, index) => (
-              <div key={selectedMonth} className="fee-item">
-                <span className="month-name">{selectedMonth}</span>
-                <span className="fee-amount">{fee} TL</span>
-                <span className="payment-method">{paymentMethods[index]}</span>
-              </div>
-            ))}
+        {(playerFees || [])
+          .filter((fee) => fee.year === selectedYear && fee.month === selectedMonth)
+          .map((fee, index) => (
+            <div key={index} className="fee-item">
+              <span className="fee-amount">Tutar: {fee.fee.toFixed(2)} TL</span>
+              <span className="payment-method">Ödeme Şekli: {fee.paymentType}</span>
+            </div>
+          ))}
       </div>
 
       <div className="payment-info">
         <div className="fee-details">
-          <p>Toplam Aidat: {calculateTotalFee()} TL</p>
+          <p>Toplam Aidat: {calculateTotalFee().toFixed(2)} TL</p>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance"; 
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -9,30 +9,42 @@ const PastAttendancePage = () => {
   const { groupId } = useParams();
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [group, setGroup] = useState({});
+  const [group, setGroup] = useState({ name: "", players: [] });
   const [attendances, setAttendances] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [filteredAttendances, setFilteredAttendances] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/groups/${groupId}`)
-      .then((response) => setGroup(response.data))
-      .catch((error) => console.error("Grup bilgisi alınamadı:", error));
+    // Oyuncuları çek
+    axiosInstance
+      .get(`/User?page=1&pageSize=100`)
+      .then((res) => {
+        const players = res.data.data.filter(
+          (player) => player.categoryGroupsId === parseInt(groupId)
+        );
+        setGroup({
+          name: `Grup ${groupId}`,
+          players: players,
+        });
+      })
+      .catch((err) => console.error("Oyuncular alınamadı:", err));
 
-    axios
-      .get("http://localhost:5000/attendances")
-      .then((response) => setAttendances(response.data))
-      .catch((error) => console.error("Yoklamalar alınamadı:", error));
+    // Yoklamaları çek
+    axiosInstance
+      .get(`/Attendance?page=1&pageSize=1000`)
+      .then((res) => {
+        setAttendances(res.data.data || []);
+      })
+      .catch((err) => console.error("Yoklamalar alınamadı:", err));
   }, [groupId]);
 
   const handleMonthChange = (e) => {
     const selected = e.target.value;
     setSelectedMonth(selected);
 
-    const filtered = attendances.filter((att) => {
-      return att.groupId === groupId && att.date.startsWith(selected);
-    });
+    const filtered = attendances.filter((att) =>
+      att.date.startsWith(selected)
+    );
     setFilteredAttendances(filtered);
   };
 
@@ -68,19 +80,19 @@ const PastAttendancePage = () => {
                     2,
                     "0"
                   )}-${String(i + 1).padStart(2, "0")}`;
+
                   const attendance = filteredAttendances.find(
-                    (att) => att.date === dateStr
+                    (att) =>
+                      att.userId === player.id &&
+                      att.date.startsWith(dateStr)
                   );
-                  const playerAttendance = attendance
-                    ? attendance.players.find((p) => p.playerId === player.id)
-                    : null;
 
                   return (
                     <td key={i + 1}>
-                      {playerAttendance
-                        ? playerAttendance.status === "Geldi"
-                          ? "+"
-                          : "-"
+                      {attendance?.status === "Geldi"
+                        ? "+"
+                        : attendance?.status === "Gelmedi"
+                        ? "-"
                         : ""}
                     </td>
                   );
@@ -95,7 +107,10 @@ const PastAttendancePage = () => {
   return (
     <div className="past-attendance-page">
       <h2>{group.name} - Geçmiş Yoklamalar</h2>
-      <button className="back-button" onClick={() => navigate(state?.from || -1)}>
+      <button
+        className="back-button"
+        onClick={() => navigate(state?.from || -1)}
+      >
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
       <label>
