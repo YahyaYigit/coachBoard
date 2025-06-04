@@ -1,14 +1,25 @@
-.attendance-page {
-  font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+body {
+  background-color: #f4f4f9;
   color: black;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-h2 {
+.attendance-page {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-page h2 {
   text-align: center;
+  font-size: 2rem;
   margin-bottom: 20px;
+  color: black;
 }
 
 .new-attendance,
@@ -16,44 +27,85 @@ h2 {
   margin-bottom: 30px;
 }
 
-h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+.new-attendance h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: black;
 }
 
 label {
   display: block;
   margin: 10px 0 5px;
+  font-size: 1rem;
+  color: black;
 }
 
 input[type="date"] {
-  padding: 8px;
+  padding: 10px;
   width: 100%;
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-
-button.submit-button {
-  background-color: #1a1a1a;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
-}
-
-button.submit-button:hover {
-  background-color: black;
-}
-
-.player-attendance {
   margin-bottom: 15px;
-  font-size: 20px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.player-attendances {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.player-attendance span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
 }
 
 .player-attendance label {
   margin-left: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+button.submit-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+button.submit-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button.past-attendance-button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  margin-top: 20px;
+}
+
+button.past-attendance-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
 }
 
 .success-message {
@@ -70,17 +122,40 @@ button.submit-button:hover {
 
 .past-attendances li {
   margin-bottom: 15px;
+  font-size: 1rem;
+  color: #333;
 }
 
 .past-attendances li strong {
-  font-size: 25px;
+  font-size: 1.2rem;
+  color: black;
 }
 
 .past-attendances ul ul {
   margin-left: 20px;
-  font-size: 20px;
+  font-size: 0.9rem;
+  color: black;
 }
 
 .past-attendances li ul li {
   margin-bottom: 5px;
+}
+
+
+
+@media (max-width: 768px) {
+  .attendance-page {
+    padding: 15px;
+  }
+
+  .player-attendance {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  button.submit-button,
+  button.past-attendance-button {
+    width: 100%;
+    padding: 10px;
+  }
 }

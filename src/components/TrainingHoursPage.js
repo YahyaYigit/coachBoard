@@ -55,8 +55,6 @@ function TrainingHoursPage() {
       categoryGroupsId: parseInt(id, 10),
     };
 
-    console.log("Gönderilen veri:", newTrainingHour);
-
     axiosInstance
       .post(`/TrainingHours/CreateTrainingHourse`, newTrainingHour)
       .then((response) => {
@@ -72,12 +70,6 @@ function TrainingHoursPage() {
         console.error("Yeni gün eklenirken hata oluştu:", error);
         alert("Bir hata oluştu, lütfen tekrar deneyin.");
       });
-  };
-
-  const handleEdit = (trainingId, trainingDate) => {
-    navigate(`/edit-training-hours/${id}/${trainingDate}`, {
-      state: { trainingId },
-    });
   };
 
   const handleDelete = (trainingId) => {
@@ -106,35 +98,38 @@ function TrainingHoursPage() {
       <h3>Antrenman Saatleri</h3>
 
       {trainingHours === null ? (
-        <div>Loading...</div>
+        <div className="loading">Yükleniyor...</div>
       ) : trainingHours.length === 0 ? (
         <div>Henüz antrenman saati eklenmedi.</div>
       ) : (
-        <ul className="training-hours-list">
+        <div className="training-hours-container">
           {trainingHours.map(({ id: trainingId, trainingDate, trainingStartTime, trainingFinishTime }) => (
-            <li key={trainingId} className="training-hours-item">
-              <span>
-                {trainingDate}: {trainingStartTime} - {trainingFinishTime}
+            <div key={trainingId} className="training-box">
+              <span className="training-date">{trainingDate}</span>
+              <span className="training-time">
+                {trainingStartTime} - {trainingFinishTime}
               </span>
-              <button
-                className="edit-button"
-                onClick={() => handleEdit(trainingId, trainingDate)}
-              >
-                <FontAwesomeIcon icon={faEdit} /> Düzenle
-              </button>
-              <button
-                className="delete-button"
-                onClick={() => handleDelete(trainingId)}
-              >
-                <FontAwesomeIcon icon={faTrash} /> Sil
-              </button>
-            </li>
+              <div className="training-actions">
+                <button
+                  className="edit-button"
+                  onClick={() => navigate(`/edit-training-hours/${trainingId}`)}
+                >
+                  <FontAwesomeIcon icon={faEdit} /> Düzenle
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(trainingId)}
+                >
+                  <FontAwesomeIcon icon={faTrash} /> Sil
+                </button>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
 
       <button
-        className="trainingButton add-day-button"
+        className="add-button"
         onClick={() => setShowNewDayForm(!showNewDayForm)}
       >
         {showNewDayForm ? "İptal Et" : "Yeni Gün Ekle"}

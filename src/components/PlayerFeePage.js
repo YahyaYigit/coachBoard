@@ -58,7 +58,7 @@ function PlayerFeePage() {
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
       <h1>Aidat Bilgilerim</h1>
-      <h2>
+      <h2 className="baslik">
         {loggedInPlayer.firstName} {loggedInPlayer.lastName}
       </h2>
 
@@ -94,7 +94,7 @@ function PlayerFeePage() {
         </div>
       </div>
 
-      <h3>Verilen Ücretler</h3>
+      <h3 className="baslik">Verilen Ücretler</h3>
       <div className="fee-container">
         {(playerFees || [])
           .filter((fee) => fee.year === selectedYear && fee.month === selectedMonth)

@@ -102,7 +102,7 @@ const AttendancePage = () => {
               <h4>Oyuncular</h4>
               {players.length > 0 ? (
                 players.map((player) => (
-                  <div key={player.id} className="player-attendance">
+                  <div key={player.id} className="player-attendances">
                     <span>
                       {player.firstName} {player.lastName}
                     </span>

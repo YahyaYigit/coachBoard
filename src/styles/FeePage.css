@@ -41,7 +41,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
   margin-top: 20px;
-  overflow-x: auto; /* Add horizontal scroll */
+  overflow-x: auto;
 }
 
 .fee-table {
@@ -73,7 +73,7 @@ body {
   border-radius: 5px;
   background-color: #99aab5;
   color: black;
-  margin-right: 10px; /* Add margin between inputs */
+  margin-right: 10px;
 }
 
 .edit-btn, .save-btn {
@@ -85,7 +85,7 @@ body {
 }
 
 .edit-btn {
-  background-color: transparent; /* Remove background color */
+  background-color: transparent;
   color: white;
 }
 
@@ -99,6 +99,9 @@ body {
 
 .total-fee {
   font-weight: bold;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
 }
 
 .total-fee h3 {
@@ -110,7 +113,10 @@ body {
   color: black;
 }
 
-/* Media Queries for Mobile Devices */
+.filters label {
+  color: white;
+}
+
 @media (max-width: 768px) {
   .selectors {
     flex-direction: column;

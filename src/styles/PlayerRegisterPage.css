@@ -67,6 +67,22 @@ input[type="date"] {
   font-size: 16px;
 }
 
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.form-check-label {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
 @media (max-width: 768px) {
   .card {
     padding: 20px;

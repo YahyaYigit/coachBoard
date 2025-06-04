@@ -1,0 +1,39 @@
+.kvkk-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa; /* Hafif gri arka plan */
+  }
+  
+  .kvkk-card {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .kvkk-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .kvkk-text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.8;
+    text-align: justify;
+  }
+  
+  .kvkk-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  
+  .kvkk-button:hover {
+    background-color: #0056b3;
+    color: #fff;
+  }

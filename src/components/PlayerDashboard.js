@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  faClock,
+  faClipboardCheck,
+  faMoneyBillWave,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/PlayerDashboard.css";
 
 function PlayerDashboard() {
   const navigate = useNavigate();
-  const [player, setPlayer] = useState(null); // Oyuncu bilgisi
-  const [loading, setLoading] = useState(true); // Yüklenme durumu
+  const [player, setPlayer] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedPlayer = localStorage.getItem("player");
 
     if (storedPlayer) {
-      const playerData = JSON.parse(storedPlayer); // Giriş yapan oyuncunun bilgilerini alıyoruz
-      setPlayer(playerData); // Oyuncu bilgilerini state'e kaydediyoruz
-      setLoading(false); // Yüklenme durumu tamamlandı
+      const playerData = JSON.parse(storedPlayer);
+      setPlayer(playerData);
+      setLoading(false);
     } else {
-      navigate("/login"); // Eğer giriş yapılmamışsa login sayfasına yönlendir
+      navigate("/login");
     }
   }, [navigate]);
 
@@ -29,39 +35,49 @@ function PlayerDashboard() {
 
   return (
     <div className="player-dashboard">
-      <h2>Takım: {player.categoryGroups}</h2>
       <h1>
         Oyuncu: {player.firstName} {player.lastName}
       </h1>
+      <h2>Takım: {player.categoryGroups}</h2>
       <h3>Grup ID: {player.categoryGroupsId}</h3>
 
       <div className="buttons-container">
-        <button
-          className="action-button"
-          onClick={() => navigate(`/trainingHours/${player.categoryGroupsId}`)}
-        >
-          Antrenman Saatlerim
-        </button>
-        <button
-          className="action-button"
-          onClick={() => navigate(`/player-attendance/${player.categoryGroupsId}`)}
-        >
-          Yoklamalarım
-        </button>
-        <button
-          className="action-button"
-          onClick={() => {
-            const role = localStorage.getItem("role");
-            if (role === "admin") {
-              navigate(`/admin/fees/${player.categoryGroupsId}`);
-            } else {
-              navigate("/player/fees");
-            }
-          }}
-        >
-          Aidatlarım
-        </button>
-      </div>
+  <div
+    className="action-box"
+    onClick={() => navigate(`/trainingHours/${player.categoryGroupsId}`)}
+  >
+    <FontAwesomeIcon icon={faClock} className="action-icon" />
+    <span>Antrenman Saatlerim</span>
+  </div>
+  <div
+    className="action-box"
+    onClick={() =>
+      navigate(`/player-attendance/${player.categoryGroupsId}`)
+    }
+  >
+    <FontAwesomeIcon icon={faClipboardCheck} className="action-icon" />
+    <span>Yoklamalarım</span>
+  </div>
+  <div
+    className="action-box"
+    onClick={() => {
+      const role = localStorage.getItem("role");
+      if (role === "admin") {
+        navigate(`/admin/fees/${player.categoryGroupsId}`);
+      } else {
+        navigate("/player/fees");
+      }
+    }}
+  >
+    <FontAwesomeIcon icon={faMoneyBillWave} className="action-icon" />
+    <span>Aidatlarım</span>
+  </div>
+  {/* Yeni Ödemelerim Kutusu */}
+  <div className="action-box">
+    <FontAwesomeIcon icon={faMoneyBillWave} className="action-icon" />
+    <span>Ödemelerim</span>
+  </div>
+</div>
     </div>
   );
 }

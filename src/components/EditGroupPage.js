@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import axiosInstance from "../api/axiosInstance"; 
+import axiosInstance from "../api/axiosInstance";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "../styles/EditGroupPage.css";
@@ -10,39 +10,38 @@ function EditGroupPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [groupName, setGroupName] = useState("");
+  const [isDeleted, setIsDeleted] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (location.state) {
       setGroupName(location.state.name);
+      setIsDeleted(location.state.isDeleted || false);
     }
   }, [location.state]);
 
   const handleSave = async () => {
     try {
       const updatedGroup = {
-        id: id,  // API'ye gönderdiğiniz id
-        age: groupName,  // Güncellenmiş yaş
-        isDeleted: false,  // isDeleted durumunu burada tutuyoruz
-        trainingHours: []  // Güncellemek istediğiniz diğer alanlar
+        id: parseInt(id, 10),
+        age: groupName,
+        isDeleted: isDeleted,
       };
   
-      const response = await axiosInstance.put(`/CategoryGroups/${id}`, updatedGroup);
-      console.log(response.data); // Dönüş verilerini kontrol edin
+      console.log("Gönderilen veri:", updatedGroup);
+  
+      const response = await axiosInstance.put(`/CategoryGroups`, updatedGroup);
+      console.log("API yanıtı:", response.data);
   
       setMessage("Grup başarıyla kaydedildi.");
       setTimeout(() => {
         navigate("/groups");
-      }, 100);
+      }, 1000);
     } catch (error) {
       console.error("Grup güncellenirken hata oluştu:", error);
+      alert("Grup güncellenirken bir hata oluştu.");
     }
-  };
-  
-  
-  
-  
-
+  };  
   const handleDelete = async () => {
     try {
       await axiosInstance.delete(`/CategoryGroups/${id}`);
@@ -50,9 +49,10 @@ function EditGroupPage() {
       setMessage("Grup başarıyla silindi.");
       setTimeout(() => {
         navigate("/groups");
-      }, 100);
+      }, 1000);
     } catch (error) {
       console.error("Grup silinirken hata oluştu:", error);
+      alert("Grup silinirken bir hata oluştu.");
     }
   };
 

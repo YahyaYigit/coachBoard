@@ -4,6 +4,7 @@ import HomePage from "./HomePage";
 import ClubLogin from "./ClubLogin";
 import GroupsPage from "./GroupsPage";
 import AllPlayersPage from "./AllPlayersPage";
+import DeletedPlayersPage from "./DeletedPlayersPage";
 import AddGroupPage from "./AddGroupPage";
 import GroupDetailPage from "./GroupDetailPage";
 import EditGroupPage from "./EditGroupPage";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/club-login" element={<ClubLogin />} />
         <Route path="/groups" element={<GroupsPage />} />
         <Route path="/all-players" element={<AllPlayersPage />} />
+        <Route path="/deleted-players" element={<DeletedPlayersPage />} />
         <Route path="/edit-group/:id" element={<EditGroupPage />} />
         <Route path="/add-group" element={<AddGroupPage />} />
         <Route path="/group/:teamId" element={<GroupDetailPage />} />

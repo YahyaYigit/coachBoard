@@ -51,10 +51,12 @@ function GroupsPage() {
         )}
       </div>
 
-      {/* Tüm Oyuncular Butonu */}
       <div className="all-players-button-container">
         <button className="all-players-button" onClick={() => navigate("/all-players")}>
           Tüm Oyuncular
+        </button>
+        <button className="deleted-players-button" onClick={() => navigate("/deleted-players")}>
+          Ayrılan Oyuncular
         </button>
       </div>
     </div>

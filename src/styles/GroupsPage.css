@@ -103,6 +103,23 @@
   background-color: #0d6efd;
 }
 
+.deleted-players-button {
+  background-color: #1f8ef1;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 20px;
+}
+
+.deleted-players-button:hover {
+  background-color: #0d6efd;
+}
+
+
 
 @media (max-width: 1024px) {
   .group-item {

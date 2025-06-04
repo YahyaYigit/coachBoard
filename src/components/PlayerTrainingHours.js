@@ -38,17 +38,18 @@ function PlayerTrainingHours() {
       <button className="back-button" onClick={() => navigate(-1)}>
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
-      <h1>{team} Grubu İçin Antrenman Saatleri</h1>
+      <h1>{`Grup ${team} İçin Antrenman Saatleri`}</h1>
       {trainingHours && trainingHours.length > 0 ? (
-        <ul className="training-hours-list">
+        <div className="training-hours-container">
           {trainingHours.map((training) => (
-            <li key={training.id} className="training-hours-item">
-              <span>
-                {training.trainingDate}: {training.trainingStartTime} - {training.trainingFinishTime}
+            <div key={training.id} className="training-box">
+              <span className="training-date">{training.trainingDate}</span>
+              <span className="training-time">
+                {training.trainingStartTime} - {training.trainingFinishTime}
               </span>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>Antrenman saati bulunmamaktadır.</p>
       )}

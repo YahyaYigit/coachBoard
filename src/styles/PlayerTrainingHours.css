@@ -9,63 +9,76 @@ body {
   text-align: center;
   padding: 40px;
   border-radius: 8px;
-  max-width: 600px;
-  margin: 130px auto;
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.training-hours h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.training-hours-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-h1 {
-  padding-top: 5px;
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-h2 {
-  font-size: 1.8em;
-  margin-top: 20px;
-}
-
-h3 {
-  font-size: 1.5em;
-  margin-top: 30px;
-}
-
-.training-hours-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.training-hours-item {
-  font-size: 1.4em;
-  margin-bottom: 15px;
-  color: black;
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
   align-items: center;
-  padding-top: 10px;
-  font-weight: bold;
 }
 
-.training-hours-item span {
-  margin-right: 15px;
+.training-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.training-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.training-date {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.training-time {
+  font-size: 1rem;
+  color: #555;
+}
+
+.loading {
+  color: black;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
   .training-hours {
     padding: 20px;
-    margin: 10px auto;
+    margin: 20px auto;
   }
 
-  .training-hours-item {
-    font-size: 1.2em;
-    flex-direction: column;
-    align-items: flex-start;
+  .training-box {
+    width: 90%;
   }
 
-  .training-hours-item span {
-    margin-right: 0;
+  .training-date {
+    font-size: 1rem;
+  }
+
+  .training-time {
+    font-size: 0.9rem;
   }
 }
